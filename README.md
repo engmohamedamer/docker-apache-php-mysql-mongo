@@ -1,6 +1,6 @@
 #  Apps Web server (docker-apache-php-mysql-mongo) built with Docker Compose
 
-This is a basic Web server environment for running multiple projects built using Docker Compose. It consists following:
+This is a basic Web server environment for running multiple projects built using Docker Compose. It consists the following:
 
 * PHP 7.3
 * Apache 2.4
