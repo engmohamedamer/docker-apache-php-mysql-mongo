@@ -18,9 +18,9 @@ docker-compose up --build
 ```
 
 Your Web server is now ready!! You can access start developing your projects
- `http://localhost`.
- `http://project1.localhost`.
- `http://project2.localhost`.
+* `http://localhost`.
+* `http://project1.localhost`.
+* `http://project2.localhost`.
 
 ## Web Server
 
