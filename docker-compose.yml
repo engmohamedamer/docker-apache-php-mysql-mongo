@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  webserver:
+    build: 
+      context: ./docker/bin/webserver
+    container_name: 'apps-webserver'
+    restart: 'always'
+    ports:
+      - "80:80"
+      - "4991:443"
+    links: 
+      - mysql
+      - mongodb
+    volumes: 
+      - ${DOCUMENT_ROOT-./}:/var/www/html
+      - ${PHP_INI-./docker/config/php/php.ini}:/usr/local/etc/php/php.ini
+      - ${VHOSTS_DIR-./docker/config/vhosts}:/etc/apache2/sites-enabled
+      - ${LOG_DIR-./docker/logs/apache2}:/var/log/apache2
+  mysql:
+    build: ./docker/bin/mysql
+    container_name: 'myapps-5.7-mysql'
+    restart: 'always'
+    ports:
+      - "13888:3306"
+    volumes: 
+      - ${MYSQL_DATA_DIR-./docker/data/mysql}:/var/lib/mysql
+      - ${MYSQL_LOG_DIR-./docker/logs/mysql}:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myapps
+      MYSQL_USER: myapps
+      MYSQL_PASSWORD: root
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    volumes:
+      - ./docker/data/mongo:/data/db
+    ports:
+      - 27017:27017
+    logging:
+      driver: none
